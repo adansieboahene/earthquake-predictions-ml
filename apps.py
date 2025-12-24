@@ -27,10 +27,13 @@ st.write(
 
 # Load data
 @st.cache_data
+@st.cache_data
 def load_data():
     df = pd.read_csv("earthquake_sample_2000_2024.csv")
 
-    df["time"] = pd.to_datetime(df["time"])
+    df["time"] = pd.to_datetime(df["time"], errors="coerce", utc=True)
+    df.dropna(subset=["time"], inplace=True)
+
     df["year"] = df["year"].astype(int)
     df["severity"] = df["severity"].astype(int)
 
