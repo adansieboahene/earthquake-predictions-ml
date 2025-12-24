@@ -1,83 +1,124 @@
-# Earthquake Severity and Regional Risk Analysis
+Earthquake Severity and Regional Risk Analysis
+Overview
 
-## Overview
-This project explores machine learning techniques for analyzing historical earthquake data.
-Rather than attempting to predict the exact timing of earthquakes, the study focuses on two
-realistic and feasible tasks:
+This project applies machine learning techniques to historical earthquake event data to analyze earthquake severity and long-term regional seismic risk. Instead of attempting to predict the exact timing of earthquakes, which is not feasible with event-based datasets, the project focuses on two realistic and valuable objectives:
 
-1. Earthquake severity prediction
-2. Regional earthquake risk classification
+Earthquake severity prediction
 
-The project uses historical seismic event data from 2000 to 2024 and demonstrates how
-machine learning can support long-term risk assessment and preparedness.
+Regional earthquake risk classification
 
----
+The analysis uses historical seismic records from 2000 to 2024 and demonstrates how machine learning can support risk assessment and disaster preparedness without overclaiming predictive capability.
 
-## Dataset
-The data was obtained from the United States Geological Survey (USGS) and includes:
-- Earthquake time
-- Latitude and longitude
-- Depth
-- Magnitude
+Dataset
 
-Two datasets were used:
-- Earthquakes with magnitude ≥ 2.5
-- Earthquakes with magnitude ≥ 4.5
+The data was obtained from the United States Geological Survey and consists of historical earthquake events with recorded magnitudes, locations, depths, and timestamps.
 
-Each record represents a single earthquake event.
+Two original datasets were used:
 
----
+Earthquakes with magnitude greater than or equal to 2.5
 
-## Machine Learning Approach
+Earthquakes with magnitude greater than or equal to 4.5
 
-### Preprocessing
-- Column selection and cleaning
-- Timestamp conversion and feature extraction
-- Label engineering for earthquake severity
-- Spatial clustering to define regions
-- Aggregation of event-level data into regional profiles
+Each row represents a single earthquake event. The data is event-based and does not include continuous seismic signals prior to earthquakes.
 
-### Models
-- Logistic Regression for baseline severity prediction
-- Random Forest for nonlinear classification
-- K-Means clustering for regional grouping
+Sampling Strategy
 
-### Evaluation
-- Train-test split
-- Precision, recall, and F1-score
-- Confusion matrices
-- Error analysis
+Due to repository size limitations, a representative sampled dataset is included in this repository. The sample was generated using stratified temporal sampling based on:
 
----
+Year of occurrence
 
-## Streamlit Prototype
+Earthquake severity class
 
-An interactive Streamlit dashboard was developed to visualize:
-- Earthquake locations by severity
-- Summary statistics
-- Regional earthquake risk levels
-- Temporal and magnitude-based filters
+This approach preserves temporal trends, class balance, and spatial diversity, ensuring that the sampled dataset remains statistically representative of the full dataset.
 
-The prototype demonstrates how the analysis results could be used in a decision-support
-context. It does not provide real-time prediction or early warning functionality.
+The sampled file used by the application and analysis is:
 
----
+earthquake_sample_2000_2024.csv
 
-## How to Run the App
+Machine Learning Approach
+Preprocessing and Feature Engineering
 
-1. Install dependencies:
-   pip install streamlit pandas scikit-learn pydeck
+Column selection and data cleaning
 
-2. Place the following files in the same folder:
-   - apps.py
-   - query_M2.5+_2000-2024.csv
-   - query_M4.5+_2000-2024.csv
+Timestamp conversion to datetime format
 
-3. Run the app:
-   streamlit run app.py
+Extraction of temporal features such as year, month, hour, and day of week
 
----
+Binary severity label creation, where magnitude greater than or equal to 4.5 is classified as high severity
 
-## Disclaimer
-This project is for academic and analytical purposes only. It does not attempt to predict
-earthquake occurrence times or provide evacuation guidance.
+Models and Techniques
+
+Logistic Regression as a baseline model for earthquake severity classification
+
+Random Forest to capture nonlinear relationships between depth, location, and temporal features
+
+K-Means clustering to group earthquake events into geographic regions
+
+Evaluation
+
+Train test split
+
+Precision, recall, and F1 score
+
+Confusion matrices
+
+Qualitative error analysis
+
+Streamlit Prototype
+
+An interactive Streamlit dashboard was developed as a prototype decision support tool. The application allows users to:
+
+Filter earthquake events by year range and minimum magnitude
+
+Visualize earthquake locations by severity on an interactive map
+
+View summary statistics for selected filters
+
+Classify geographic regions into low, medium, or high risk categories based on historical severity ratios
+
+The prototype uses the sampled dataset and mirrors the preprocessing steps used in the analysis notebook.
+
+How to Run the Application
+
+Install required dependencies:
+
+pip install streamlit pandas scikit-learn pydeck
+
+
+Ensure the following files are in the same directory:
+
+app.py
+
+earthquake_sample_2000_2024.csv
+
+Run the application:
+
+streamlit run app.py
+
+Project Structure
+
+notebooks/
+Contains the data loading, preprocessing, modeling, and analysis notebooks
+
+app.py
+Streamlit dashboard prototype
+
+earthquake_sample_2000_2024.csv
+Representative sampled dataset used for analysis and visualization
+
+README.md
+Project documentation
+
+Limitations
+
+The project does not attempt to predict earthquake occurrence times
+
+Results are based solely on historical event data
+
+Tectonic plate boundaries and real time seismic signals are not included
+
+Future work could integrate additional geophysical datasets to improve regional risk modeling.
+
+Disclaimer
+
+This project is for academic and analytical purposes only. It does not provide real time earthquake prediction, early warning, or evacuation guidance.
